@@ -34,7 +34,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="jquery.js"></script>
   <script src="jquery-ui.js"></script>
   <script type="text/javascript" src="personalinfo.js"></script>
-  <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="../cookieStorage.js"></script>
   
 </head>
 
@@ -65,13 +65,11 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    
+    <a href="start_helpal.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><img src="img/1.jpg" class="img-circle" width="50" height="50"></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><img src="img/1.jpg" class="img-circle" width="50" height="50"><b> Helpal</span>
+       <span class="logo-lg"><img align="left" src="img/1.jpg" class="img-circle" width="50" height="50"><b>Helpal</b></span>
     </a>
-
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
@@ -97,7 +95,7 @@ desired effect
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="img/im.jpg" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -181,17 +179,17 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="img/im.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span id="username" class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="img/im.jpg" class="img-circle" alt="User Image">
 
-                <p>
-                  Alexander Pierce - Web Developer
+                <p id="usermotto">
+                  Alexander Pierce - Web Developer<br/>
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -213,7 +211,7 @@ desired effect
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <button class="btn btn-default btn-flat" type="button" id="signout">Sign out</button>
                 </div>
               </li>
             </ul>
@@ -228,15 +226,31 @@ desired effect
   </header>
   <div id="set" title="Settings">
     <form name="dialog1">
-    username：<input type="text" id="name" required/>
+     gender：<input type="radio" id="gender" value="male" />male&nbsp;&nbsp;
+      <input type="radio" id="gender" value="male" />female<br />
+    <br/>
+    age: <input type="text" id="age" required="required"/>
     <br/><br/>
-     sex：<input type="radio" id="sex" value="male" />male&nbsp;&nbsp;
-      <input type="radio" id="sex" value="male" />female<br />
-    <br/>
-    motto：<input type="text" id="motto" required/>
-    <br/>
-    <br/>
-    <input align="center" type="submit" name="submit1" value="submit"/>
+    star_signs: 
+    <select style="width:118px;margin-left:-100;height:25px" id="star_signs">
+    <option>---请选择---</option>
+    <option value="白羊座">白羊座(3.21-4.19)</option>
+    <option value="金牛座">金牛座(4.20-5.20)</option>
+    <option value="双子座">双子座(5.21-6.21)</option>
+    <option value="巨蟹座">巨蟹座(6.22-7.22)</option>
+    <option value="狮子座">狮子座(7.23-8.22)</option>
+    <option value="处女座">处女座(8.23-9.22)</option>
+    <option value="天秤座">天秤座(9.23-10.23)</option>
+    <option value="天蝎座">天蝎座(10.24-11.22)</option>
+    <option value="射手座">射手座(11.23-12.21)</option>
+    <option value="摩羯座">摩羯座(12.22-1.19)</option>
+    <option value="水瓶座">巨蟹座(1.20-2.18)</option>
+    <option value="白羊座">白羊座(2.19-3.20)</option>
+</select>
+<br/><br/>
+ motto: <input type="text" placeholder="Motto" id="motto" required=required>
+ <br/><br/>
+    <button type="button" class="btn btn-block btn-primary" id="submit1">submit</button>
     </form>    
 </div>
 
@@ -244,7 +258,7 @@ desired effect
     <form name="dialog2">
     Upload Img：<input type="file" id="img_source"/>
     <br/>
-    <input type="button" name="submit2" value="upload"/>
+    <button type="button" class="btn btn-block btn-primary" id="submit2">upload</button>
     </form>    
 </div>
   <!-- Left side column. contains the logo and sidebar -->
@@ -256,12 +270,12 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="img/im.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p id="user_name">Alexander Pierce</p>
           <!-- Status -->
-          <a href="#"><i class="fa fa-mars text-success"></i>male</a>
+          <a href="#" id="usergender"><i class="fa fa-mars text-success"></i>male</a>
         </div>
       </div>
 
@@ -281,10 +295,10 @@ desired effect
       <ul class="sidebar-menu">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active">
-        <a name="link" href="data.html" ><i class="fa fa-map-o"></i> <span>Check And Edit Your Skills</span></a></li>
         <li>
-        <a name="link" href="asddsa"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <a name="link" href="skills.html"><i class="fa fa-map-o"></i> <span>Check And Edit Your Skills</span></a></li>
+        <li>
+        <a name="link" href="interests.html"><i class="fa fa-map-o"></i><span>Check And Edit Your Interests</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">
@@ -428,6 +442,8 @@ desired effect
 <!-- AdminLTE App -->
 <script src="dist/js/demo.js"></script>
 <!-- page script -->
+<script>
+</script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

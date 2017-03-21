@@ -1,3 +1,9 @@
+$(function()
+{
+
+})
+
+
 function register()
 {
 	var username=$("#username").val();
@@ -8,16 +14,15 @@ function register()
 	{
 		//alert(username+password+email);
 		md5_password=MD5(password);
-		$.post("http://*/v1/user/signup",{username:username,password:md5_password,email:email},
+		$.post("http://112.74.53.157:8080/Helpal/user/signup",{username:username,password:md5_password,email:email},
 			function(data,status)
 			{
-				alert(data);
-				if(data.status!=0)
+				if(data.Status!=0)
 					alert("err:"+data.errorMsg);
 				else
 				{
 					alert("Register success!")
-					window.location.href("index.html");
+					window.location.href="index.html";
 				}
 			}
 			)
