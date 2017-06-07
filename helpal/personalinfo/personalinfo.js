@@ -3,28 +3,42 @@ $(function(){
     //localStorage.clear();
     //get userinfo
     //TGlsaWFuMTQ4OTU2NzUwM2U3YjViOWM1MTZhNjA4ZWQ0Y2E2MDE0NWVhMDliNTkx%0D%0A
-    $.get("http://112.74.53.157:8080/Helpal/user/info",{username:"Lilian"},
+    var auto=new cookieStorage();
+    var username=auto.getItem("username");
+    //alert(accessToken!=null);
+    if(username==null) 
+    {
+        alert("Seession expires.please relogin!");
+        location.href="../index/index.html";
+    }
+    else{
+    $.get("http://112.74.53.157:8080/Helpal/user/info",{username:username},
         function(data,status)
         {
             if(data.Status!=0) alert("error: "+data.errorMsg);
             else
             {
+                //alert(data.User[0].username);
+                
                 var info=new cookieStorage(1200,"/");
+                //info.removeItem("user");
                 info.setItem("user",JSON.stringify(data));
                 var userinfo=JSON.parse(info.getItem("user"));
-                $("title").empty().append("Helpal-"+userinfo.User[0].username+"的个人主页");
-                $("#username").empty().append(userinfo.User[0].username);
-                $("#usermotto").empty().append(userinfo.User[0].username+"<br/>"+"<small>"+userinfo.User[0].motto+"</small>");
-                $("#user_name").empty().append(userinfo.User[0].username);
-                $("#user_img").empty().append(userinfo.User[0].avatar);
-                var gender=userinfo.User[0].gender;
+               
+                $("#username").empty().append(data.User[0].username);
+                $("#usermotto").empty().append(data.User[0].username+"<br/><small><font size='1px'>"+data.User[0].star_signs+"</font><br/>"+data.User[0].motto+"</small>");
+                $("#user_name").empty().append(data.User[0].username);
+                $("#user_img").empty().append(data.User[0].avatar);
+                var gender=data.User[0].gender;
                 if(gender=="male")
-                    $("#usergender").empty().append('<i class="fa fa-mars text-success"></i>male')
+                    $("#usergender").empty().append("<small>"+data.User[0].age+"</small>&nbsp;&nbsp;"+'<i class="fa fa-mars text-success"></i>male');
                 else
-                    $("#usergender").empty().append('<i class="fa fa-venus" style="color:pink"></i>female')
+                    $("#usergender").empty().append("<small>"+data.User[0].age+"</small>&nbsp;&nbsp;"+'<i class="fa fa-venus" style="color:pink"></i>female');
+                //window.location.reload(true);
             }
         }
         );
+    }
     //upload img
     $("#upload").dialog({autoOpen:false}); 
     $("#set").dialog({autoOpen:false}); 
@@ -76,14 +90,31 @@ $(function(){
      //set userinfo
    
    $("#submit1").click(function(){
-        var c_gender=$("#gender").val();
+        var radios = document.getElementsByName('gender');
+        for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+        // 弹出选中值
+        var c_gender=radios[i].value;
+        // 选中后退出循环
+        break;
+         }
+        }
         var c_age=$("#age").val();
         var c_star_signs=$("#star_signs").val();
         var motto=$("#motto").val();
+        var auto=new cookieStorage();
         //alert("123");
         //alert(motto);
+        if(auto.getItem("accessToken")==null) 
+        {
+            alert("Seession expires.please relogin!");
+
+            location.href="../index/index.html";
+        }
+        else{
+            //alert(auto.getItem("accessToken"));
         $.post("http://112.74.53.157:8080/Helpal/user/setInfo",
-            {accessToken:"UnlraWUrMTQ4OTY0NzI3NStlN2I1YjljNTE2YTYwOGVkNGNhNjAxNDVlYTA5YjU5MQ%3D%3D%0A",gender:c_gender,age:c_age,star_signs:c_star_signs,motto:motto},
+            {accessToken:auto.getItem("accessToken"),gender:c_gender,age:c_age,star_signs:c_star_signs,motto:motto},
             function(data,status)
             {
                 //alert("11");
@@ -93,10 +124,11 @@ $(function(){
                 else
                 {
                     alert("Set success!");
-                    window.location.reload(true);
+                    window.location.replace("start_helpal.html");
                 }
             }
             )
+    }
         $( "#set" ).dialog( "close" );
     });
 

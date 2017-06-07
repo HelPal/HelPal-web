@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Helpal-个人主页</title>
+  <title>Helpal-编辑技能</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -225,43 +225,108 @@ desired effect
       </div>
     </nav>
   </header>
- <div id="set" title="Settings">
-    <form name="dialog1">
-     gender：<input type="radio" id="gender" value="male" />male&nbsp;&nbsp;
-      <input type="radio" id="gender" value="male" />female<br />
-    <br/>
-    age: <input type="text" id="age" required="required"/>
-    <br/><br/>
-    star_signs: 
-    <select style="width:118px;margin-left:-100;height:25px" id="star_signs">
-    <option>---请选择---</option>
-    <option value="白羊座">白羊座(3.21-4.19)</option>
-    <option value="金牛座">金牛座(4.20-5.20)</option>
-    <option value="双子座">双子座(5.21-6.21)</option>
-    <option value="巨蟹座">巨蟹座(6.22-7.22)</option>
-    <option value="狮子座">狮子座(7.23-8.22)</option>
-    <option value="处女座">处女座(8.23-9.22)</option>
-    <option value="天秤座">天秤座(9.23-10.23)</option>
-    <option value="天蝎座">天蝎座(10.24-11.22)</option>
-    <option value="射手座">射手座(11.23-12.21)</option>
-    <option value="摩羯座">摩羯座(12.22-1.19)</option>
-    <option value="水瓶座">巨蟹座(1.20-2.18)</option>
-    <option value="白羊座">白羊座(2.19-3.20)</option>
-</select>
-<br/><br/>
- motto: <input type="text" placeholder="Motto" id="motto" required=required>
- <br/><br/>
-    <button type="button" class="btn btn-block btn-primary" id="submit1">submit</button>
-    </form>    
-</div>
 
-  <div id="upload" title="Upload img">
-    <form name="dialog2">
-    Upload Img：<input type="file" id="img_source"/>
-    <br/>
-    <input type="button" name="submit2" value="upload"/>
-    </form>    
-</div>
+ <div id="set" title="Settings" class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">修改个人信息</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" name="dialog1">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="age">Age</label>
+                  <input type="text" class="form-control" id="age" placeholder="User Age">
+                </div>
+                <div class="form-group">
+                  <label for="motto">Motto</label>
+                  <input type="text" class="form-control" id="motto" placeholder="Motto">
+                </div>
+                <div class="form-group">
+                  <label for="star_signs">Star signs</label>
+                  <select style="width:118px;margin-left:-100;height:25px" id="star_signs">
+                  <option>---请选择---</option>
+                  <option value="白羊座">白羊座(3.21-4.19)</option>
+                  <option value="金牛座">金牛座(4.20-5.20)</option>
+                  <option value="双子座">双子座(5.21-6.21)</option>
+                  <option value="巨蟹座">巨蟹座(6.22-7.22)</option>
+                  <option value="狮子座">狮子座(7.23-8.22)</option>
+                  <option value="处女座">处女座(8.23-9.22)</option>
+                  <option value="天秤座">天秤座(9.23-10.23)</option>
+                  <option value="天蝎座">天蝎座(10.24-11.22)</option>
+                  <option value="射手座">射手座(11.23-12.21)</option>
+                  <option value="摩羯座">摩羯座(12.22-1.19)</option>
+                  <option value="水瓶座">巨蟹座(1.20-2.18)</option>
+                  <option value="白羊座">白羊座(2.19-3.20)</option>
+                </select>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="radio" name="gender" value="male"> male
+                  </label>
+                  <label>
+                    <input type="radio" name="gender" value="female"> female
+                  </label>
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="button" class="btn btn-primary" id="submit1">Submit</button>
+              </div>
+            </form>
+          </div>
+          <div id="upload" title="Upload img" class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">上传头像</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" name="dialog2">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="img_source">Img input</label>
+                  <input type="file" id="img_source">
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Check me out
+                  </label>
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="button" class="btn btn-primary" id="submit2">Upload</button>
+              </div>
+            </form>
+          </div>
+        <div id="edit" title="Edit" class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">编辑技能</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" name="dialog3">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="name">Skills</label>
+                  <input type="text" class="form-control" id="name" placeholder="Skills">
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="radio" name="ad_edit" value="true"> Add
+                  </label>
+                  <label>
+                    <input type="radio" name="ad_edit" value="false"> Delete
+                  </label>
+                </div>
+              </div>
+               <div class="box-footer">
+                <button type="button" class="btn btn-primary" id="submit3">submit</button>
+              </div>
+            </form>
+          </div>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
 
@@ -296,6 +361,11 @@ desired effect
       <ul class="sidebar-menu">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
+        <li>
+        <a href="../search/map2.html"><i class="fa fa-search"></i><span>Recommend And Search</span></a></li>
+         <li>
+        <a href="service.html"><i class="fa fa-align-left"></i><span>Edit Service</span></a></li>
+         <li>
         <li class="active">
         <a name="link" href="skills.html"><i class="fa fa-map-o"></i> <span>Check And Edit Your Skills</span></a></li>
         <li>
@@ -322,8 +392,8 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        Skills &nbsp;
+        <input type="button" class="btn btn-primary" name="edit" value="Edit"/>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
